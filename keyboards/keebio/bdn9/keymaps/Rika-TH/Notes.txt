@@ -1,0 +1,29 @@
+this text file is a mess jeez, I added stuff randomly as I did and many hours after, still never set the layer showing through bottom three LEDs
+
+seems I didn't really keep to this at all, I'm tired, I never got the RGB for layers up, this'll do, please never compile this, just use it to "get" some features
+
+guess you could also use it as a base, layer zero for w/e, layer 1 discord, layer 2 mouse etc
+it does have server nav an stuff on discord etc, main thing it's missing is alt tab as I was too lazy, 
+16 hours of messing with it after already not having slept is great
+
+features (lol)
+
+different encoder stuff on each layer (actually the best feature prob)
+
+a single key that using TapDance will switch between all layers and is nicely expandable if you want to edit VIA
+
+a layer of custom macros (all set for discord emotes, but hey) hijacking base keycodes as... yes (just add keycodes to the array starting with safe_range to add more that don't use them, aka if you steal the code for a 40%+)
+
+Vno
+uses a TD script from https://www.reddit.com/r/olkb/comments/6u7ts4/qmk_momentary_tap_dance_layer_switching_on_a/ to switch layers very nicely
+
+##(because of lazyness at 1am, the TD is what sets it to static instead of starting at static if other effects are ever wanted, pretty stupid but didn't want to mess with anything and break it)## eh, who cares about RGB actually working
+
+Layer 1: main
+Layer 2: dynamic macros
+Layer 3: emote
+Layer 4: misc/extra
+
+
+
+(should make it use include on config and rules for VIA/defaults to save size :shrug:)
