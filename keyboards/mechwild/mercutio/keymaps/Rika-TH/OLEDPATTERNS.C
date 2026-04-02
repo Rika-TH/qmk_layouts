@@ -1,6 +1,13 @@
 // Most of the used OLED pieces used, moved into an external file
+
+// god it all still doesn't work aaaaaaaa
+// had a possible idea stated in main map, but another one could be to not write the stuff to the right
+// also have a thought that maybe doing everything as one line (so never go to end line) might work
+// would rather not go and do all the images as the left without the borders for the rest of the UI on the full screens
+// although that may be the easiest?
+
 // The original fancy Mercutio text (both moved here as font funnies and also with added border can stop grabbing the layer change callback)
-static void render_name(void) {			// caps lock arrow
+static void render_name(void) {            // caps lock arrow
   static const char PROGMEM mercutio_name[] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -39,7 +46,7 @@ static void render_name(void) {			// caps lock arrow
   oled_write_raw_P(mercutio_name, sizeof(mercutio_name));
 }
 // The main screens to (hopefully) make it easier for others usage
-static void render_colemak(void) {		// The screen for Colemak (all keep the tail as a lazy clear)
+static void render_colemak(void) {        // The screen for Colemak (all keep the tail as a lazy clear)
   static const char PROGMEM colemak_screen[] = {
 0x01, 0x05, 0x7d, 0x05, 0x79, 0x15, 0x79, 0x7d, 0x55, 0x29, 0x01, 0xff, 0x01, 0x7d, 0x45, 0x45, 
 0x65, 0x7d, 0x01, 0xff, 0x01, 0x3d, 0x41, 0x3d, 0x41, 0x3d, 0x01, 0xff, 0x01, 0x7d, 0x15, 0x15, 
@@ -77,7 +84,7 @@ static void render_colemak(void) {		// The screen for Colemak (all keep the tail
   oled_write_raw_P(colemak_screen, sizeof(colemak_screen));
 }
 
-static void render_qwerty(void) {		// The screen for QWERTY
+static void render_qwerty(void) {        // The screen for QWERTY
   static const char PROGMEM qwerty_screen[] = {
 0x01, 0x05, 0x7d, 0x05, 0x79, 0x15, 0x79, 0x7d, 0x55, 0x29, 0x01, 0xff, 0x01, 0x7d, 0x45, 0x45, 
 0x65, 0x7d, 0x01, 0xff, 0x01, 0x3d, 0x41, 0x3d, 0x41, 0x3d, 0x01, 0xff, 0x01, 0x7d, 0x55, 0x55, 
@@ -115,7 +122,7 @@ static void render_qwerty(void) {		// The screen for QWERTY
   oled_write_raw_P(qwerty_screen, sizeof(qwerty_screen));
 }
 
-static void render_numbersym(void) {	// The screen for the numrow and symbol layer
+static void render_numbersym(void) {    // The screen for the numrow and symbol layer
   static const char PROGMEM numbersym_board[] = {
 0x7d, 0x55, 0x55, 0x01, 0x5d, 0x55, 0x75, 0x01, 0x7d, 0x45, 0x01, 0xff, 0x01, 0x41, 0x49, 0x7d, 
 0x7d, 0x41, 0x01, 0xff, 0x01, 0x75, 0x55, 0x55, 0x55, 0x49, 0x01, 0xff, 0x01, 0x55, 0x55, 0x55, 
@@ -153,7 +160,7 @@ static void render_numbersym(void) {	// The screen for the numrow and symbol lay
   oled_write_raw_P(numbersym_board, sizeof(numbersym_board));
 }
 
-static void render_functionrow(void) {	// The screen for the function row
+static void render_functionrow(void) {    // The screen for the function row
   static const char PROGMEM function_board[] = {
 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0xff, 0x01, 0x41, 0x49, 0x7d, 
 0x7d, 0x41, 0x01, 0xff, 0x01, 0x75, 0x55, 0x55, 0x55, 0x49, 0x01, 0xff, 0x01, 0x55, 0x55, 0x55, 
@@ -191,6 +198,22 @@ static void render_functionrow(void) {	// The screen for the function row
   oled_write_raw_P(function_board, sizeof(function_board));
 }
 
+// to add as default
+static void render_what(void) {            // fallback top banner
+  static const char PROGMEM what_board[] = {
+0x01, 0x02, 0x0c, 0x30, 0x40, 0x80, 0x40, 0x30, 0x0c, 0x02, 0x0c, 0x30, 0x40, 0x80, 0x40, 0x30, 
+0x0c, 0x02, 0x01, 0x00, 0xff, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 
+0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 
+0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 
+0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+0x00, 0x00, 0x00, 0xfc, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0xfc, 
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0xf0, 0x10, 0x00, 0x00, 0x00
+  };
+  oled_set_cursor(0,0);
+  oled_write_raw_P(what_board, sizeof(what_board));
+}
+
 // ah, so the default is 6 pixels wide per character and 8 tall, so unless you change that those are our numbers for pointer
 // gonna have to either change width and height or make them overwrite eachother/clear certain pixels
 // maybe make them all start on the left but they have enough blank to reach the wall away from them?
@@ -198,58 +221,160 @@ static void render_functionrow(void) {	// The screen for the function row
 // OR add some logic, so layer 4 is on? is layer 3 on? and then have a piece with partial 3 on it etc
 
 // Addons
-static void render_caps(void) {			// caps lock arrow
+static void render_caps(void) {            // caps lock arrow
   static const char PROGMEM caps_board[] = {
-0x00, 0x00, 0x04, 0x06, 0x7f, 0x06, 0x04
+0x00, 0x00, 0x04, 0x06, 0x7f, 0x06, 0x04,0 // no clue if the ending 0 is even needed anymore
   };
   oled_set_cursor(30,0);
   oled_write_raw_P(caps_board, sizeof(caps_board));
 }
 
-static void render_num(void) {			// num lock arrow
+static void render_num(void) {            // num lock arrow
   static const char PROGMEM numlock_board[] = {
-0x00, 0x7f, 0x02, 0x04, 0x08, 0x10, 0x20, 0x7f
+0x00, 0x7f, 0x02, 0x04, 0x08, 0x10, 0x20, 0x7f,0
   };
   oled_set_cursor(28,0);
   oled_write_raw_P(numlock_board, sizeof(numlock_board));
 }
 
-static void render_scroll(void) {		// scroll lock arrow
+static void render_scroll(void) {        // scroll lock arrow
   static const char PROGMEM scrolllock_board[] = {
-0x00, 0x00, 0x14, 0x36, 0x7f, 0x36, 0x14
+0x00, 0x00, 0x14, 0x36, 0x7f, 0x36, 0x14,0
   };
   oled_set_cursor(26,0);
   oled_write_raw_P(scrolllock_board, sizeof(scrolllock_board));
 }
+// oh wait, the idea was to only have one arrow... haaaah, leaving the excess for allowing multiple arrows here incase it's needed and also as a reminder...
 
-/*static void render_ly1(void) {			// layer one ARROW
-  static const char PROGMEM lay1_board[] = {
-0x00, 0x02, 0x02, 0x07, 0x02
+static void render_ly1arr(void) {            // layer 1 ARROW
+  static const char PROGMEM lay1arr_board[] = {
+0x00, 0x20, 0x20, 0x70, 0x20,0
   };
-  oled_set_cursor(29,2); // was 29,14 hmmm, seems the line count is hard done not based on font height guess I need to add blank space ABOVE arrows one of these will need a version for top bottom and both arrows though as it's line will be 2 arrows
-  oled_write_raw_P(lay1_board, sizeof(lay1_board));
+  oled_set_cursor(29,3); // was 29,14 hmmm, seems the line count is hard done not based on font height guess I need to add blank space ABOVE arrows one of these will need a version for top bottom and both arrows though as it's line will be 2 arrows
+  oled_write_raw_P(lay1arr_board, sizeof(lay1arr_board));
 }
 
-static void render_ly2(void) {			// layer two ARROW
-  static const char PROGMEM lay2_board[] = {
-0x00, 0x02, 0x02, 0x07, 0x02
+static void render_ly2arr(void) {            // layer 2 ARROW
+  static const char PROGMEM lay2arr_board[] = {
+0x00, 0x00, 0x00, 0x01, 0x00,0
   };
-  oled_set_cursor(29,11);
-  oled_write_raw_P(lay2_board, sizeof(lay2_board));
+  oled_set_cursor(29,3);
+  oled_write_raw_P(lay2arr_board, sizeof(lay2arr_board));
 }
 
-static void render_ly3(void) {			// layer three ARROW
-  static const char PROGMEM lay3_board[] = {
-0x00, 0x02, 0x02, 0x07, 0x02
+/*
+static void render_ly2arr1(void) {            // layer 2 ARROW 1 yes
+  static const char PROGMEM lay2arr1_board[] = {
+0x00, 0x20, 0x20, 0x71, 0x20
   };
-  oled_set_cursor(29,8);
-  oled_write_raw_P(lay3_board, sizeof(lay3_board));
+  oled_set_cursor(29,3);
+  oled_write_raw_P(lay2arr1_board, sizeof(lay2arr1_board));
+}
+*/
+
+static void render_ly3arr(void) {            // layer 3 ARROW
+  static const char PROGMEM lay3arr_board[] = {
+0x00, 0x02, 0x02, 0x07, 0x02,0
+  };
+  oled_set_cursor(29,2);
+  oled_write_raw_P(lay3arr_board, sizeof(lay3arr_board));
 }
 
-static void render_ly4(void) {			// layer four ARROW
-  static const char PROGMEM lay4_board[] = {
-0x00, 0x02, 0x02, 0x07, 0x02
+/*
+static void render_ly3arr2(void) {            // layer 3 arrow 2 yes
+  static const char PROGMEM lay3arr2_board[] = {
+0x00, 0x82, 0x82, 0xc7, 0x82
   };
-  oled_set_cursor(29,5);
-  oled_write_raw_P(lay4_board, sizeof(lay4_board));
+  oled_set_cursor(29,2);
+  oled_write_raw_P(lay3arr2_board, sizeof(lay3arr2_board));
+}
+*/
+
+static void render_lyno3arr2(void) {            // layer 3 arrow missing 2 yes
+  static const char PROGMEM layno3arr2_board[] = {
+0x00, 0x80, 0x80, 0xc0, 0x80,0
+  };
+  oled_set_cursor(29,2);
+  oled_write_raw_P(layno3arr2_board, sizeof(layno3arr2_board));
+} 
+
+static void render_ly4arr(void) {            // layer 4 arrow
+  static const char PROGMEM lay4arr_board[] = {
+0x01, 0x09, 0x09, 0x1d, 0x09,0
+  };
+  oled_set_cursor(29,1);
+  oled_write_raw_P(lay4arr_board, sizeof(lay4arr_board));
+}
+
+/*
+static void render_ly1num(void) {            // layer 1 number
+  static const char PROGMEM lay1num_board[] = {
+0x00, 0x00, 0xf8, 0x00
+  };
+  oled_set_cursor(31,3);
+  oled_write_raw_P(lay1num_board, sizeof(lay1num_board));
+}
+
+static void render_ly2num(void) {            // layer 2 number
+  static const char PROGMEM lay2num_board[] = {
+0x02, 0x03, 0x02, 0x02
+  };
+  oled_set_cursor(31,3);
+  oled_write_raw_P(lay2num_board, sizeof(lay2num_board));
+}
+
+static void render_ly2num1(void) {            // layer 2 number 1 yes
+  static const char PROGMEM lay2num1_board[] = {
+0x02, 0x03, 0xfa, 0x02
+  };
+  oled_set_cursor(31,3);
+  oled_write_raw_P(lay2num1_board, sizeof(lay2num1_board));
+}
+
+static void render_ly3num(void) {            // layer 3 number
+  static const char PROGMEM lay3num_board[] = {
+0x08, 0x0a, 0x0a, 0x05
+  };
+  oled_set_cursor(31,2);
+  oled_write_raw_P(lay3num_board, sizeof(lay3num_board));
+}
+
+static void render_ly3num2(void) {            // layer 3 number 2 top
+  static const char PROGMEM lay3num2_board[] = {
+0x28, 0x2a, 0xaa, 0x45
+  };
+  oled_set_cursor(31,2);
+  oled_write_raw_P(lay3num2_board, sizeof(lay3num2_board));
+}
+
+static void render_lyno3num2(void) {            // layer 3 missing 2 top
+  static const char PROGMEM layno3num2_board[] = {
+0x20, 0x20, 0xa0, 0x40
+  };
+  oled_set_cursor(31,2);
+  oled_write_raw_P(layno3num2_board, sizeof(layno3num2_board));
+}
+
+static void render_ly4num(void) {            // layer 4 number
+  static const char PROGMEM lay4num_board[] = {
+0x19, 0x15, 0x3f, 0x11
+  };
+  oled_set_cursor(31,1);
+  oled_write_raw_P(lay4num_board, sizeof(lay4num_board));
+}
+
+static void render_ly4num3(void) {            // layer 4 number with 3 top
+  static const char PROGMEM lay4num3_board[] = {
+0x99, 0x95, 0xbf, 0x11
+  };
+  oled_set_cursor(31,1);
+  oled_write_raw_P(lay4num3_board, sizeof(lay4num3_board));
+}
+
+static void render_lyno4num3(void) {            // layer 4 missing 3 top
+  static const char PROGMEM layno4num3_board[] = {
+0x81, 0x81, 0x81, 0x01
+  };
+  oled_set_cursor(31,1);
+  oled_write_raw_P(layno4num3_board, sizeof(layno4num3_board));
 }*/
