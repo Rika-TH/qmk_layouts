@@ -9,3 +9,4 @@
 #UNICODE_ENABLE #might be not needed, might be an alt thing to enable
 VIA_ENABLE = yes #VIA
 KEY_LOCK_ENABLE = yes #Keylock, the whole reason we're doing this (finally)
+#PROGRAMMABLE_BUTTON_ENABLE = yes
